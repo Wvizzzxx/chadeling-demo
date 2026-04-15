@@ -1,0 +1,22 @@
+{
+  "name": "waystea-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Монорепозиторий waystea.ru - интернет-магазин чая",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "dev:frontend": "turbo run dev --filter=frontend",
+    "dev:backend": "turbo run dev --filter=backend",
+    "dev:admin": "turbo run dev --filter=admin"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
