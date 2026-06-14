@@ -3,7 +3,7 @@
     <!-- Hero Banner -->
     <section class="about-hero">
       <div class="container fade-in-up">
-        <h1>О компании WayTea</h1>
+        <h1>О компании Cha de ling</h1>
         <p class="subtitle">Чай как искусство — мы знаем о нём всё</p>
         <div class="hero-icon zoom-in">🍃</div>
       </div>
@@ -15,9 +15,19 @@
         <div class="two-columns">
           <div class="text-content fade-in-up">
             <h2>Наша история</h2>
-            <p>Компания WayTea была основана в 2015 году с простой мечтой — дать каждому человеку возможность попробовать лучший чай со всего мира.</p>
-            <p>Мы начинали как маленький магазинчик в Москве, а сегодня являемся одним из крупнейших онлайн-магазинов чая в России.</p>
-            <p>Наша команда включает профессиональных чайных сомелье, которые ежегодно посещают лучшие плантации Китая, Индии, Шри-Ланки, Японии, Кении и других стран.</p>
+            <p>
+              Компания Cha de ling была основана в 2015 году с простой мечтой — дать
+              каждому человеку возможность попробовать настоящий китайский чай.
+            </p>
+            <p>
+              Мы начинали как маленький магазинчик в Москве, а сегодня являемся
+              одним из крупнейших онлайн-магазинов чая в России.
+            </p>
+            <p>
+              Наша команда включает профессиональных чайных сомелье, которые
+              ежегодно посещают лучшие чайные провинции Китая —
+              Юньнань, Фуцзянь, Аньхой и Гуандун.
+            </p>
             <div class="stats-row">
               <div class="stat-item">
                 <strong>8+</strong>
@@ -25,23 +35,25 @@
               </div>
               <div class="stat-item">
                 <strong>150+</strong>
-                <span>Сортов чая</span>
+                <span>Сортов китайского чая</span>
               </div>
               <div class="stat-item">
                 <strong>50K+</strong>
                 <span>Клиентов</span>
               </div>
               <div class="stat-item">
-                <strong>12</strong>
-                <span>Стран-поставщиков</span>
+                <strong>5</strong>
+                <span>Провинций Китая</span>
               </div>
             </div>
           </div>
           <div class="image-placeholder zoom-in">
-            <div class="placeholder-card">
-              <span class="placeholder-icon">🏔️</span>
-              <p>Чайные плантации на склонах гор</p>
-            </div>
+            <!-- ЗАГЛУШКА: Замените src на своё фото плантации -->
+            <img
+              :src="settings.about_hero_image || '/images/products/1780057992768-5d0suv.jpg'"
+              alt="Чайные плантации"
+              class="about-photo"
+            />
           </div>
         </div>
       </div>
@@ -55,7 +67,10 @@
           <div class="value-card fade-in-up delay-1">
             <div class="value-icon">🌱</div>
             <h3>Качество прежде всего</h3>
-            <p>Мы тщательно проверяем каждый товар. Чай проходит лабораторное тестирование перед отправкой в наш магазин.</p>
+            <p>
+              Мы тщательно проверяем каждый товар. Чай проходит лабораторное
+              тестирование перед отправкой в наш магазин.
+            </p>
             <ul>
               <li>Сертификация органического происхождения</li>
               <li>Свежесть каждой партии</li>
@@ -65,9 +80,12 @@
           <div class="value-card fade-in-up delay-2">
             <div class="value-icon">🤝</div>
             <h3>Честные отношения</h3>
-            <p>Мы работаем напрямую с фермерами, обеспечивая справедливую оплату труда производителей.</p>
+            <p>
+              Мы работаем напрямую с фермерами, обеспечивая справедливую оплату
+              труда производителей.
+            </p>
             <ul>
-              <li>Прямые контракты с плантациями</li>
+              <li>Прямые контракты с плантациями Китая</li>
               <li>Поддержка малых производителей</li>
               <li>Прозрачная ценовая политика</li>
             </ul>
@@ -75,7 +93,10 @@
           <div class="value-card fade-in-up delay-3">
             <div class="value-icon">💚</div>
             <h3>Забота об экологии</h3>
-            <p>Мы используем экологически чистую упаковку и стремимся минимизировать воздействие на окружающую среду.</p>
+            <p>
+              Мы используем экологически чистую упаковку и стремимся
+              минимизировать воздействие на окружающую среду.
+            </p>
             <ul>
               <li>Перерабатываемые материалы</li>
               <li>Углеродно-нейтральная доставка</li>
@@ -92,29 +113,57 @@
         <h2 class="section-title fade-in-up">Наша команда</h2>
         <p class="section-desc">Профессионалы, которые знают о чае всё</p>
         <div class="grid grid-4">
+          <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
-            <div class="team-avatar">👨‍💼</div>
+            <img
+              :src="settings.about_team_1 || '/images/products/1780059468031-ofanqq.png'"
+              alt="Алексей Чайкинский"
+              class="team-photo"
+            />
             <h3>Алексей Чайкинский</h3>
             <span class="team-role">Основатель, CEO</span>
-            <p class="team-bio">15 лет опыта в чайной индустрии. Сертифицированный чайный сомелье.</p>
+            <p class="team-bio">
+              15 лет опыта в чайной индустрии. Сертифицированный чайный сомелье.
+            </p>
           </div>
+          <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
-            <div class="team-avatar">👩‍🔬</div>
+            <img
+              :src="settings.about_team_2 || '/images/products/1780059482270-mnzzj3.jpg'"
+              alt="Мария Зелёная"
+              class="team-photo"
+            />
             <h3>Мария Зелёная</h3>
             <span class="team-role">Главный технолог</span>
-            <p class="team-bio">Контролирует качество каждой партии. Эксперт по ферментации чая.</p>
+            <p class="team-bio">
+              Контролирует качество каждой партии. Эксперт по ферментации чая.
+            </p>
           </div>
+          <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
-            <div class="team-avatar">🧑‍🍳</div>
+            <img
+              :src="settings.about_team_3 || '/images/products/1780059503825-a9p3un.jpg'"
+              alt="Виктория Листова"
+              class="team-photo"
+            />
             <h3>Виктория Листова</h3>
             <span class="team-role">Чайный сомелье</span>
-            <p class="team-bio">Посетила более 40 плантаций по всему миру. Автор чайных коллекций.</p>
+            <p class="team-bio">
+              Посетила более 40 плантаций по всему миру. Автор чайных коллекций.
+            </p>
           </div>
+          <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
-            <div class="team-avatar">👨‍💻</div>
+            <img
+              :src="settings.about_team_4 || '/images/products/1780059515496-ftv8pl.jpg'"
+              alt="Дмитрий Улунин"
+              class="team-photo"
+            />
             <h3>Дмитрий Улунин</h3>
             <span class="team-role">Директор по логистике</span>
-            <p class="team-bio">Обеспечивает быструю и бережную доставку чая по всей России.</p>
+            <p class="team-bio">
+              Обеспечивает быструю и бережную доставку чая по всей России.
+            </p>
           </div>
         </div>
       </div>
@@ -125,16 +174,31 @@
       <div class="container">
         <h2 class="section-title fade-in-up">Сертификаты</h2>
         <div class="certs-grid">
+          <!-- ЗАГЛУШКА: Замените src на фото сертификата -->
           <div class="cert-card zoom-in">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f0f0f0' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='%23333' text-anchor='middle' dy='.5em'%3E🏆 Organic Cert.🏆%3C/text%3E%3C/svg%3E" alt="Organic Certificate" />
+            <img
+              :src="settings.about_cert_1 || '/images/products/1780059537195-5z36rv.png'"
+              alt="Organic Certificate"
+              class="cert-photo"
+            />
             <p>Органическая продукция</p>
           </div>
+          <!-- ЗАГЛУШКА: Замените src на фото сертификата -->
           <div class="cert-card zoom-in">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f0f0f0' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='%23333' text-anchor='middle' dy='.5em'%3E✅ ISO 22000✅%3C/text%3E%3C/svg%3E" alt="ISO Certificate" />
+            <img
+              :src="settings.about_cert_2 || '/images/products/1780059548173-p7cdih.jpg'"
+              alt="ISO Certificate"
+              class="cert-photo"
+            />
             <p>ISO 22000</p>
           </div>
+          <!-- ЗАГЛУШКА: Замените src на фото сертификата -->
           <div class="cert-card zoom-in">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f0f0f0' width='200' height='150'/%3E%3Ctext x='50%25' y='50%25' font-size='18' fill='%23333' text-anchor='middle' dy='.5em'%3E🌿 Fair Trade🌿%3C/text%3E%3C/svg%3E" alt="Fair Trade" />
+            <img
+              :src="settings.about_cert_3 || '/images/products/1780059561182-o93cgs.png'"
+              alt="Fair Trade"
+              class="cert-photo"
+            />
             <p>Fair Trade</p>
           </div>
         </div>
@@ -187,10 +251,17 @@
       <div class="container">
         <div class="cta-card fade-in-up">
           <h2>Хотите узнать больше?</h2>
-          <p>Свяжитесь с нами любым удобным способом. Наши специалисты всегда готовы помочь.</p>
+          <p>
+            Свяжитесь с нами любым удобным способом. Наши специалисты всегда
+            готовы помочь.
+          </p>
           <div class="cta-buttons">
-            <router-link to="/contact" class="btn btn-outline-light btn-lg">Контакты</router-link>
-            <router-link to="/catalog" class="btn btn-outline-light btn-lg">Каталог</router-link>
+            <router-link to="/contact" class="btn btn-outline-light btn-lg"
+              >Контакты</router-link
+            >
+            <router-link to="/catalog" class="btn btn-outline-light btn-lg"
+              >Каталог</router-link
+            >
           </div>
         </div>
       </div>
@@ -199,7 +270,17 @@
 </template>
 
 <script setup lang="ts">
-// About page - no additional logic needed
+import { ref, onMounted } from 'vue';
+import api from '../api';
+
+const settings = ref<Record<string, string>>({});
+
+onMounted(async () => {
+  try {
+    const { data } = await api.get('/settings');
+    if (data.success) settings.value = data.data;
+  } catch { /* settings are optional */ }
+});
 </script>
 
 <style scoped>
@@ -218,7 +299,7 @@
 }
 
 .about-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' opacity='0.05'%3E%3Cpath fill='white' d='M50 0C22.4 0 0 22.4 0 50c0 27.6 22.4 50 50 50s50-22.4 50-50C100 22.4 77.6 0 50 0z'/%3E%3C/svg%3E");
@@ -268,22 +349,15 @@
 .image-placeholder {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.placeholder-card {
+.about-photo {
   width: 100%;
-  max-width: 400px;
-  padding: 3rem;
-  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  max-width: 500px;
   border-radius: 20px;
-  text-align: center;
-  animation: float 4s ease-in-out infinite;
-}
-
-.placeholder-icon {
-  font-size: 6rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   display: block;
-  margin-bottom: 1rem;
 }
 
 .stats-row {
@@ -328,13 +402,13 @@
   background: white;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
 }
 
 .value-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .value-icon {
@@ -366,7 +440,7 @@
 }
 
 .value-card li::before {
-  content: '✓ ';
+  content: "✓ ";
   color: #4caf50;
   font-weight: bold;
 }
@@ -390,9 +464,24 @@
   transition: all 0.3s ease;
 }
 
-.team-avatar {
-  font-size: 5rem;
+.team-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
   margin-bottom: 1rem;
+  border: 4px solid #e8f5e9;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cert-photo {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
 }
 
 .team-card h3 {
@@ -431,13 +520,8 @@
   background: white;
   padding: 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-.cert-card img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .cert-card p {
@@ -458,7 +542,7 @@
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 0;
@@ -493,7 +577,7 @@
   border-radius: 50%;
   transform: translateX(-50%);
   border: 4px solid white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-content {
@@ -542,18 +626,35 @@
 
 /* Animations */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 @keyframes zoomIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .fade-in-up {
@@ -572,19 +673,45 @@
   transform: translateY(-10px);
 }
 
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
+.delay-1 {
+  animation-delay: 0.1s;
+}
+.delay-2 {
+  animation-delay: 0.2s;
+}
+.delay-3 {
+  animation-delay: 0.3s;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
-  .about-hero h1 { font-size: 2rem; }
-  .two-columns { grid-template-columns: 1fr; gap: 2rem; }
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .certs-grid { grid-template-columns: 1fr; }
-  .timeline::before { left: 20px; }
-  .timeline-year { text-align: left; padding-right: 0; margin: 0; }
-  .timeline-dot { left: 20px; }
-  .timeline-content { margin-left: 0; padding-left: 3rem; }
+  .about-hero h1 {
+    font-size: 2rem;
+  }
+  .two-columns {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .certs-grid {
+    grid-template-columns: 1fr;
+  }
+  .timeline::before {
+    left: 20px;
+  }
+  .timeline-year {
+    text-align: left;
+    padding-right: 0;
+    margin: 0;
+  }
+  .timeline-dot {
+    left: 20px;
+  }
+  .timeline-content {
+    margin-left: 0;
+    padding-left: 3rem;
+  }
 }
 </style>

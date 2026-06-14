@@ -1,33 +1,37 @@
 <template>
   <div class="blog-page animate-page">
     <!-- Hero -->
-    <section class="blog-hero">
+    <section class="blog-hero" :style="heroImage ? { backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+      <div class="blog-hero-overlay" v-if="heroImage"></div>
       <div class="container fade-in-up">
-        <h1>Блог WayTea</h1>
-        <p class="subtitle">Всё о чае: истории, советы, рецепты и новости</p>
+        <h1>Блог Cha de ling</h1>
+        <p class="subtitle">Всё о китайском чае: истории, советы, рецепты и новости</p>
         <div class="hero-icon zoom-in">📝</div>
       </div>
     </section>
 
     <!-- Featured Article -->
-    <section class="featured-article">
+    <section v-if="featuredArticle" class="featured-article">
       <div class="container">
-        <div class="featured-card fade-in-up">
+        <router-link :to="`/blog/${featuredArticle.slug}`" class="featured-card fade-in-up">
           <div class="featured-badge">Рекомендуем</div>
           <div class="featured-content">
-            <div class="featured-image">🍵</div>
+          <div class="featured-image">
+            <img v-if="featuredArticle.image" :src="featuredArticle.image" :alt="featuredArticle.title" class="article-img" />
+            <span v-else>{{ featuredArticle.icon }}</span>
+          </div>
             <div class="featured-text">
-              <span class="featured-category">История чая</span>
-              <h2>Путешествие чая: от древнего Китая до вашего стола</h2>
-              <p>Узнайте, как чай прошёл путь от лекарственного средства в древнем Китае до самого популярного напитка в мире. История, полная приключений, открытий и культурного обмена.</p>
+              <span class="featured-category">{{ featuredArticle.category }}</span>
+              <h2>{{ featuredArticle.title }}</h2>
+              <p>{{ featuredArticle.excerpt }}</p>
               <div class="featured-meta">
-                <span>📅 15 апреля 2026</span>
-                <span>⏱️ 10 мин чтения</span>
+                <span>📅 {{ formatDate(featuredArticle.createdAt) }}</span>
+                <span>⏱️ {{ featuredArticle.readTime }}</span>
               </div>
-              <button class="btn btn-primary">Читать далее</button>
+              <span class="btn btn-primary">Читать далее</span>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </section>
 
@@ -46,19 +50,22 @@
     <section class="articles-section">
       <div class="container">
         <div class="articles-grid">
-          <article v-for="(article, index) in filteredArticles" :key="index" class="article-card hover-lift fade-in-up" :style="{ animationDelay: `${index * 0.1}s` }">
-            <div class="article-image">{{ article.icon }}</div>
+          <router-link v-for="(article, index) in filteredArticles" :key="article._id || index" :to="`/blog/${article.slug}`" class="article-card hover-lift fade-in-up" :style="{ animationDelay: `${index * 0.1}s` }">
+            <div class="article-image">
+              <img v-if="article.image" :src="article.image" :alt="article.title" class="article-img" />
+              <span v-else>{{ article.icon }}</span>
+            </div>
             <div class="article-content">
               <span class="article-category">{{ article.category }}</span>
               <h3>{{ article.title }}</h3>
               <p>{{ article.excerpt }}</p>
               <div class="article-meta">
-                <span>📅 {{ article.date }}</span>
+                <span>📅 {{ formatDate(article.createdAt) }}</span>
                 <span>⏱️ {{ article.readTime }}</span>
               </div>
-              <button class="btn btn-outline-primary btn-sm">Читать далее</button>
+              <span class="btn btn-outline-primary btn-sm">Читать далее</span>
             </div>
-          </article>
+          </router-link>
         </div>
       </div>
     </section>
@@ -80,103 +87,65 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import api from '../api';
 
 interface Article {
+  _id: string;
   title: string;
+  slug: string;
   excerpt: string;
+  content: string;
   category: string;
   icon: string;
-  date: string;
+  image?: string;
+  gradient: string;
   readTime: string;
+  author: string;
+  published: boolean;
+  createdAt: string;
 }
 
 const activeCategory = ref('Все');
-const categories = ['Все', 'История чая', 'Советы', 'Рецепты', 'Новости', 'Обзоры'];
+const categories = ['Все', 'История', 'Советы', 'Рецепты', 'Новости', 'Обзоры'];
+const articles = ref<Article[]>([]);
+const loading = ref(true);
+const heroImage = ref('');
 
-const articles = ref<Article[]>([
-  {
-    title: 'Как правильно заваривать зелёный чай',
-    excerpt: 'Узнайте секреты идеального заваривания зелёного чая. Температура воды, время и пропорции — всё, что нужно знать.',
-    category: 'Советы',
-    icon: '🍃',
-    date: '12 апреля 2026',
-    readTime: '5 мин'
-  },
-  {
-    title: 'Пуэр: чай, который становится лучше с годами',
-    excerpt: 'История пуэра, его виды и правила хранения. Почему коллекционеры готовы платить тысячи за выдержанные образцы.',
-    category: 'История чая',
-    icon: '🫖',
-    date: '10 апреля 2026',
-    readTime: '8 мин'
-  },
-  {
-    title: 'Чайный гриб: рецепт домашнего комбучи',
-    excerpt: 'Пошаговый рецепт приготовления освежающего напитка комбучи в домашних условиях. Полезные свойства и советы.',
-    category: 'Рецепты',
-    icon: '🧪',
-    date: '8 апреля 2026',
-    readTime: '6 мин'
-  },
-  {
-    title: 'Новая коллекция: весенние чаи 2026',
-    excerpt: 'Представляем новую коллекцию весенних чаёв. Свежий урожай с плантаций Китая и Японии уже в нашем каталоге.',
-    category: 'Новости',
-    icon: '🌸',
-    date: '5 апреля 2026',
-    readTime: '3 мин'
-  },
-  {
-    title: 'Обзор: лучшие улуны Тайваня',
-    excerpt: 'Дегустация и сравнение пяти лучших улунов с высокогорных плантаций Тайваня. Рейтинг и рекомендации.',
-    category: 'Обзоры',
-    icon: '🏔️',
-    date: '3 апреля 2026',
-    readTime: '12 мин'
-  },
-  {
-    title: 'Чай и здоровье: научные исследования',
-    excerpt: 'Что говорит наука о пользе чая? Обзор последних исследований о влиянии чая на здоровье и долголетие.',
-    category: 'Советы',
-    icon: '🔬',
-    date: '1 апреля 2026',
-    readTime: '10 мин'
-  },
-  {
-    title: 'Матча: японский суперфуд',
-    excerpt: 'Всё о матча — японском порошковом зелёном чае. История, польза и способы приготовления.',
-    category: 'История чая',
-    icon: '🍵',
-    date: '28 марта 2026',
-    readTime: '7 мин'
-  },
-  {
-    title: 'Чайный коктейль: 5 рецептов с чаем',
-    excerpt: 'Освежающие коктейли на основе чая. Идеально для тёплого времени года. Простые рецепты с пошаговыми инструкциями.',
-    category: 'Рецепты',
-    icon: '🍹',
-    date: '25 марта 2026',
-    readTime: '5 мин'
-  },
-  {
-    title: 'Открытие нового магазина в Санкт-Петербурге',
-    excerpt: 'Рады сообщить об открытии нового фирменного магазина WayTea в Санкт-Петербурге. Адрес и часы работы.',
-    category: 'Новости',
-    icon: '🏪',
-    date: '22 марта 2026',
-    readTime: '2 мин'
-  }
-]);
+const featuredArticle = computed(() => articles.value[0] || null);
 
 const filteredArticles = computed(() => {
-  if (activeCategory.value === 'Все') return articles.value;
-  return articles.value.filter(a => a.category === activeCategory.value);
+  const list = activeCategory.value === 'Все' ? articles.value : articles.value.filter(a => a.category === activeCategory.value);
+  return list.slice(activeCategory.value === 'Все' ? 1 : 0);
 });
+
+function formatDate(dateStr: string): string {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 
 function subscribeNewsletter() {
   alert('Спасибо за подписку на блог!');
 }
+
+onMounted(async () => {
+  try {
+    const [articlesRes, settingsRes] = await Promise.all([
+      api.get('/articles'),
+      api.get('/settings').catch(() => null)
+    ]);
+    if (articlesRes.data.success) {
+      articles.value = articlesRes.data.data;
+    }
+    if (settingsRes?.data?.data?.blog_hero_image) {
+      heroImage.value = settingsRes.data.data.blog_hero_image;
+    }
+  } catch {
+    // API not available, use empty list
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 
 <style scoped>
@@ -186,10 +155,18 @@ function subscribeNewsletter() {
 
 /* Hero */
 .blog-hero {
-  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  background: linear-gradient(135deg, #3d6b2d, #5A8F3C);
   color: white;
   text-align: center;
   padding: 5rem 0;
+  position: relative;
+}
+
+.blog-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
 }
 
 .blog-hero h1 {
@@ -224,7 +201,7 @@ function subscribeNewsletter() {
   position: absolute;
   top: 20px;
   left: 20px;
-  background: #e74c3c;
+  background: #5A8F3C;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -306,13 +283,13 @@ function subscribeNewsletter() {
 }
 
 .category-tab:hover {
-  border-color: #e74c3c;
-  color: #e74c3c;
+  border-color: #5A8F3C;
+  color: #5A8F3C;
 }
 
 .category-tab.active {
-  background: #e74c3c;
-  border-color: #e74c3c;
+  background: #5A8F3C;
+  border-color: #5A8F3C;
   color: white;
 }
 
@@ -347,6 +324,14 @@ function subscribeNewsletter() {
   align-items: center;
   justify-content: center;
   font-size: 4rem;
+  overflow: hidden;
+}
+
+.article-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .article-content {
@@ -355,8 +340,8 @@ function subscribeNewsletter() {
 
 .article-category {
   display: inline-block;
-  background: #ffebee;
-  color: #c0392b;
+  background: #e8f5e9;
+  color: #3d6b2d;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -428,7 +413,7 @@ function subscribeNewsletter() {
 
 .newsletter-form input:focus {
   outline: none;
-  border-color: #e74c3c;
+  border-color: #5A8F3C;
 }
 
 /* Animations */
@@ -458,6 +443,34 @@ function subscribeNewsletter() {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
+
+/* Dark Theme */
+:global([data-theme="dark"]) .featured-card { background: #16213e !important; }
+:global([data-theme="dark"]) .featured-card h2,
+:global([data-theme="dark"]) .featured-text h2 { color: #e0e0e0 !important; }
+:global([data-theme="dark"]) .featured-card p,
+:global([data-theme="dark"]) .featured-text p { color: #a0a0a0 !important; }
+:global([data-theme="dark"]) .featured-image { background: linear-gradient(135deg, #1a1a3e, #1a2a1a) !important; }
+:global([data-theme="dark"]) .featured-category { background: #1a3a1a !important; color: #6db33f !important; }
+:global([data-theme="dark"]) .featured-meta { color: #888 !important; }
+
+:global([data-theme="dark"]) .category-tab { background: #16213e !important; border-color: #2a2a5a !important; color: #a0a0a0 !important; }
+:global([data-theme="dark"]) .category-tab:hover { border-color: #6db33f !important; color: #6db33f !important; }
+:global([data-theme="dark"]) .category-tab.active { background: #6db33f !important; border-color: #6db33f !important; color: white !important; }
+
+:global([data-theme="dark"]) .article-card { background: #16213e !important; }
+:global([data-theme="dark"]) .article-card h3 { color: #e0e0e0 !important; }
+:global([data-theme="dark"]) .article-card p { color: #a0a0a0 !important; }
+:global([data-theme="dark"]) .article-image { background: linear-gradient(135deg, #1a1a3e, #1a2a1a) !important; }
+:global([data-theme="dark"]) .article-category { background: #3a1a1a !important; color: #ef9a9a !important; }
+:global([data-theme="dark"]) .article-meta { color: #888 !important; }
+
+:global([data-theme="dark"]) .newsletter-section { background: #1a1a2e !important; }
+:global([data-theme="dark"]) .newsletter-card { background: #16213e !important; }
+:global([data-theme="dark"]) .newsletter-card h2 { color: #e0e0e0 !important; }
+:global([data-theme="dark"]) .newsletter-card p { color: #a0a0a0 !important; }
+:global([data-theme="dark"]) .newsletter-form input { background: #1a1a3e !important; border-color: #2a2a5a !important; color: #e0e0e0 !important; }
+:global([data-theme="dark"]) .newsletter-form input:focus { border-color: #6db33f !important; }
 
 /* Responsive */
 @media (max-width: 768px) {
