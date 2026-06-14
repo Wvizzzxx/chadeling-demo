@@ -16,10 +16,7 @@
         <router-link :to="`/blog/${featuredArticle.slug}`" class="featured-card fade-in-up">
           <div class="featured-badge">Рекомендуем</div>
           <div class="featured-content">
-          <div class="featured-image">
-            <img v-if="featuredArticle.image" :src="featuredArticle.image" :alt="featuredArticle.title" class="article-img" />
-            <span v-else>{{ featuredArticle.icon }}</span>
-          </div>
+          <div class="featured-image">{{ featuredArticle.icon }}</div>
             <div class="featured-text">
               <span class="featured-category">{{ featuredArticle.category }}</span>
               <h2>{{ featuredArticle.title }}</h2>
@@ -51,10 +48,7 @@
       <div class="container">
         <div class="articles-grid">
           <router-link v-for="(article, index) in filteredArticles" :key="article._id || index" :to="`/blog/${article.slug}`" class="article-card hover-lift fade-in-up" :style="{ animationDelay: `${index * 0.1}s` }">
-            <div class="article-image">
-              <img v-if="article.image" :src="article.image" :alt="article.title" class="article-img" />
-              <span v-else>{{ article.icon }}</span>
-            </div>
+            <div class="article-image">{{ article.icon }}</div>
             <div class="article-content">
               <span class="article-category">{{ article.category }}</span>
               <h3>{{ article.title }}</h3>

@@ -50,7 +50,7 @@
           <div class="image-placeholder zoom-in">
             <!-- ЗАГЛУШКА: Замените src на своё фото плантации -->
             <img
-              :src="settings.about_hero_image || img('images/products/1780057992768-5d0suv.jpg')"
+              :src="settings.about_hero_image || img('images/about/hero.jpg')"
               alt="Чайные плантации"
               class="about-photo"
             />
@@ -116,7 +116,7 @@
           <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
             <img
-              :src="settings.about_team_1 || img('images/products/1780059468031-ofanqq.png')"
+              :src="settings.about_team_1 || img('images/about/team1.jpg')"
               alt="Алексей Чайкинский"
               class="team-photo"
             />
@@ -129,7 +129,7 @@
           <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
             <img
-              :src="settings.about_team_2 || img('images/products/1780059482270-mnzzj3.jpg')"
+              :src="settings.about_team_2 || img('images/about/team2.jpg')"
               alt="Мария Зелёная"
               class="team-photo"
             />
@@ -142,7 +142,7 @@
           <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
             <img
-              :src="settings.about_team_3 || img('images/products/1780059503825-a9p3un.jpg')"
+              :src="settings.about_team_3 || img('images/about/team3.jpg')"
               alt="Виктория Листова"
               class="team-photo"
             />
@@ -155,7 +155,7 @@
           <!-- ЗАГЛУШКА: Замените src на фото сотрудника -->
           <div class="team-card hover-lift">
             <img
-              :src="settings.about_team_4 || img('images/products/1780059515496-ftv8pl.jpg')"
+              :src="settings.about_team_4 || img('images/about/team4.jpg')"
               alt="Дмитрий Улунин"
               class="team-photo"
             />
@@ -177,7 +177,7 @@
           <!-- ЗАГЛУШКА: Замените src на фото сертификата -->
           <div class="cert-card zoom-in">
             <img
-              :src="settings.about_cert_1 || img('images/products/1780059537195-5z36rv.png')"
+              :src="settings.about_cert_1 || img('images/about/cert1.jpg')"
               alt="Organic Certificate"
               class="cert-photo"
             />
@@ -186,7 +186,7 @@
           <!-- ЗАГЛУШКА: Замените src на фото сертификата -->
           <div class="cert-card zoom-in">
             <img
-              :src="settings.about_cert_2 || img('images/products/1780059548173-p7cdih.jpg')"
+              :src="settings.about_cert_2 || img('images/about/cert2.jpg')"
               alt="ISO Certificate"
               class="cert-photo"
             />
@@ -195,7 +195,7 @@
           <!-- ЗАГЛУШКА: Замените src на фото сертификата -->
           <div class="cert-card zoom-in">
             <img
-              :src="settings.about_cert_3 || img('images/products/1780059561182-o93cgs.png')"
+              :src="settings.about_cert_3 || img('images/about/cert3.jpg')"
               alt="Fair Trade"
               class="cert-photo"
             />
